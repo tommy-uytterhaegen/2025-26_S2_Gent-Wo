@@ -1,0 +1,53 @@
+﻿using Microsoft.Xna.Framework;
+using MonoGame_Pikachu.Core.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MonoGame_Pikachu.Core.Graphics
+{
+    public static class GraphicsFacade
+    {
+
+        private static GraphicsDeviceManager _graphics = null;
+
+        public static void Initialize(Game game)
+        {
+            _graphics = new GraphicsDeviceManager(game);
+        }
+
+        public static void Initialize(Game game, int width, int height)
+        {
+            Initialize(game);
+
+            ChangeResolution(width, height);
+        }
+
+        public static void ChangeResolution(int width, int height)
+        {
+            GraphicsFacadeNotInitializedException.ThrowIfNull(_graphics);
+
+            _graphics.PreferredBackBufferHeight = height;
+            _graphics.PreferredBackBufferWidth = width;
+
+            _graphics.ApplyChanges();
+        }
+
+        public static float GetWindowVerticalCenter()
+        {
+            GraphicsFacadeNotInitializedException.ThrowIfNull(_graphics);
+
+            // * is a lot faster than /
+            return _graphics.PreferredBackBufferHeight * 0.5f;
+        }
+
+        public static float GetWindowWidth()
+        {
+            GraphicsFacadeNotInitializedException.ThrowIfNull(_graphics);
+
+            return _graphics.PreferredBackBufferWidth;
+        }
+    }
+}
