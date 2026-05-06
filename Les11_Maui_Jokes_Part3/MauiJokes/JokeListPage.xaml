@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiJokes.JokeListPage"
+             Title="NewPage1">
+    
+    <CollectionView ItemsSource="{Binding Items}">
+        
+        <!-- Deze header wordt boven de items getoond -->
+        <CollectionView.Header>
+            <Button
+                Text="Voeg item toe"
+                Command="{Binding AddItemCommand}"/>
+        </CollectionView.Header>
+        
+        <CollectionView.ItemTemplate>
+            <!-- We vertellen een collectionview hoe hij 1 item moet tonen. Alles is beschikbaar. De BindingContext van 1 item wordt datzelfde item, dus niet meer de ViewModel van de pagina -->
+            <DataTemplate>
+                <VerticalStackLayout Padding="16,8,16,8">
+                    <Label Text="{Binding Text}" />
+                </VerticalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
